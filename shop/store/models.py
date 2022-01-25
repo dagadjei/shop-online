@@ -39,6 +39,11 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
+    @property
+    def get_total(self):
+        total = self.product.price * self.quantity
+        return total
+
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
